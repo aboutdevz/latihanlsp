@@ -117,7 +117,7 @@
             <label> <b>Nama Printer</b> </label>
             <select name="namaprinter">
                 <?php foreach( $printerData as $printer ) : ?>
-                    <option value="<?=$printer['idprinter']?>"><?=$printer['namaprinter']?>   Harga Rp. <?=$printer['harga']?></option>
+                    <option value="<?=$printer['idprinter']?>"><?=$printer['namaprinter']?>   (Harga Rp. <?= number_format($printer['harga'],2,'.',',')?>)</option>
                 <?php endforeach;?>
             </select>
             <label> <b>Jumlah</b> </label>

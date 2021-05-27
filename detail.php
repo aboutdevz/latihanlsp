@@ -60,9 +60,9 @@
         <hr> <br>
         <p><b>jumlah unit  : </b>    <?=$printerDataById['jumlah']?></p>
         <hr> <br>
-        <p><b>Harga per unit   : </b><?=$printerDataById['harga']?></p>
+        <p><b>Harga per unit   : </b><?= "Rp. " . number_format($printerDataById['harga'],2,'.',',')?></p>
         <hr> <br>
-        <p><b>Total    : </b>        <?= ($printerDataById['jumlah']) * ($printerDataById['harga'])?> </p>
+        <p><b>Total    : </b>        <?= "Rp. " . number_format(($printerDataById['jumlah']) * ($printerDataById['harga']),2,'.',',') ?> </p>
         <hr> <br>
         <b>Status   : </b> <p class="green-badge">  <?= ($printerDataById['userid2'] == 0) ? ('belum lunas') : ('lunas') ?></p>
         <br> <br>
