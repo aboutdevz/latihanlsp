@@ -64,8 +64,8 @@
         <hr> <br>
         <p><b>Total    : </b>        <?= ($printerDataById['jumlah']) * ($printerDataById['harga'])?> </p>
         <hr> <br>
-        <p><b>Status   : </b>        <?= ($printerDataById['userid2'] == 0) ? ('belum lunas') : ('lunas') ?></p>
-        <hr> <br>
+        <b>Status   : </b> <p class="green-badge">  <?= ($printerDataById['userid2'] == 0) ? ('belum lunas') : ('lunas') ?></p>
+        <br> <br>
 
         </div>
         </div>

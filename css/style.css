@@ -213,6 +213,15 @@ tbody:before {
     border: none;
     cursor: pointer;
 }
+.green-badge
+{
+    display: inline-block;
+    color: white;
+    background-color: #28a745;
+    font-size: 10pt;
+    border-radius: 25px;
+    padding: 1em 2em;
+}
 input,select
 {
     display: block;
