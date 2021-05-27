@@ -1,6 +1,7 @@
 <?php session_start();
 
 include_once('Conn.php');
+include_once('../global.php');
 
 $namaPrinter = $Conn->escape_string($_POST['namaprinter']);
 $spesifikasi = $Conn->escape_string($_POST['spesifikasi']);
@@ -15,11 +16,11 @@ if ( isset($_SESSION['is_login']) && $_SESSION['user'] == 'admin' )
                             '$spesifikasi', '$harga')");
     if ( $Conn->affected_rows > 0 )
     {
-        echo '<script>alert("data berhasil dimasukkan");window.location.assign("http://localhost/ujikomv2/produk.php");</script>';
+        echo '<script>alert("data berhasil dimasukkan");window.location.assign("'.BASEURL.'produk.php");</script>';
     }
     else
     {
-        echo '<script>alert("data gagal dimasukkan");window.location.assign("http://localhost/ujikomv2/produk.php");</script>';
+        echo '<script>alert("data gagal dimasukkan");window.location.assign("'.BASEURL.'produk.php");</script>';
     }
 }
 

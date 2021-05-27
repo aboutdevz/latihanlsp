@@ -17,7 +17,7 @@
     tb_transaksi.jumlah, tb_printer.harga, 
     tb_transaksi.userid2 FROM 
     tb_transaksi INNER JOIN tb_printer ON 
-    tb_printer.idprinter = tb_transaksi.idprinter where idtransaksi = 20");
+    tb_printer.idprinter = tb_transaksi.idprinter where idtransaksi = ".$_GET['id']);
     $printerDataById = $printerDataById->fetch_assoc();
     if ( $result->num_rows < 1 )
     {
@@ -48,60 +48,28 @@
         </ul>
     </div>
     <div class="container">
+        <button class="button"> <a style="height:10px; width:auto; padding: 1em 2em; padding-bottom:23px; color:white; text-decoration: none;" href="index.php">Kembali</a> </button>
+        <br>
+        <br>
         <div class="card">
-        <h2>Selamat Datang di Aplikasi Penjualan Printer</h2>
-        <h4>Welcome <?= $_SESSION['user']?>!</h4>
-        <?= ($_SESSION['user'] != "admin") ? '<button id="adduser" class="button" style="margin-top:30px; padding:10px" onclick="showAddUser();">Add New Pesanan</button>' : '' ?>
-        
-        <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>Nama Printer</th>
-                    <th>Jumlah Unit</th>
-                    <th>Harga Per Unit</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Options</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                <?php foreach( $resultArray as $hasil ) : ?>
-                <tr class="active-row">                        
-                        <td><?=$hasil['namaprinter']?></td>
-                        <td><?=$hasil['jumlah']?></td>
-                        <td> <?= "Rp. " . number_format($hasil['harga'],2,'.',',') ?></td>
-                        <td><?= "Rp. " . number_format($hasil['jumlah'] * $hasil['harga'],2,'.',',') ?></td>
-                        <td><?= ( $hasil['userid2'] == 1 ) ? "Sudah Dikonfirmasi" : "Belum Dikonfirmasi" ?></td>
-                        <td>
-                            <div class="btn-group">
-                            
-                                <?= ( $_SESSION['user'] == "admin" ) ? ( ($hasil['userid2'] == 0) ? '<button> <a style="color:white;" href="process/konfirmasi.php?id='. $hasil['idtransaksi'] .'">Konfirmasi</a> </button>' : 'Done' ) : ($hasil['userid2'] != 0) ? ('<div class="btn-group">
-    <button id="detailModalButton" style="background-color:#007bff; width:100%;"> <a style="text-decoration: none; color:white;" href="detail.php?id='.$hasil['idtransaksi'].'"> Detail</button>
-    <button onclick="konfirmasi(this,user)" style="color:white;" data-id="'. $hasil['idtransaksi'] .'">Delete</button>
-</div>') : ('<div class="btn-group">
-<button data-id="'. $hasil['idtransaksi'] .'" data-idprinter="'. $hasil['namaprinter'] .'" data-jumlah="'. $hasil['jumlah'] .'" onclick="updateUser(this);">Update</button>
-<button onclick="konfirmasi(this,user)" style="color:white;" data-id="'. $hasil['idtransaksi'] .'">Delete</button>
-</div>').'
-                                    
-                                ' ?>
-                            </div>
-                        </td>
-                </tr>
-                <?php endforeach;?>
-                <?php
-                    if (!$cekIsi)
-                    {
-                        echo '<tr><td colspan="6"><h4>Tidak Ada Data</h4></td></tr>';
-                    }
-                ?>
-                
-            </tbody>
-        </table>
+        <div id="detailModal" class="modal-cotainer">
+        <h2>Detail transaksi</h2><br><br>
+        <p><b>id transaksi :    </b>   <?=$printerDataById['idtransaksi']?></p>
+        <hr> <br>
+        <p><b>nama printer : </b>    <?=$printerDataById['namaprinter']?></p>
+        <hr> <br>
+        <p><b>jumlah unit  : </b>    <?=$printerDataById['jumlah']?></p>
+        <hr> <br>
+        <p><b>Harga per unit   : </b><?=$printerDataById['harga']?></p>
+        <hr> <br>
+        <p><b>Total    : </b>        <?= ($printerDataById['jumlah']) * ($printerDataById['harga'])?> </p>
+        <hr> <br>
+        <p><b>Status   : </b>        <?= ($printerDataById['userid2'] == 0) ? ('belum lunas') : ('lunas') ?></p>
+        <hr> <br>
+
+        </div>
         </div>
 
-    </div>
     </div>
     <button class="logout"> <a style="color:white;" href="process/logout.php">Logout</a> </button>
 
@@ -149,7 +117,22 @@
 
 
 
-    
+    <div id="detailModal" class="modal-container">
+        <h2>Detail transaksi</h2><br><br>
+        <p><b>id transaksi :    </b>   <?=$printerDataById['idtransaksi']?></p>
+        <hr>
+        <p><b>nama printer : </b>    <?=$printerDataById['namaprinter']?></p>
+        <hr>
+        <p><b>jumlah unit  : </b>    <?=$printerDataById['jumlah']?></p>
+        <hr>
+        <p><b>Harga per unit   : </b><?=$printerDataById['harga']?></p>
+        <hr>
+        <p><b>Total    : </b>        <?= ($printerDataById['jumlah']) * ($printerDataById['harga'])?> </p>
+        <hr>
+        <p><b>Status   : </b>        <?= ($printerDataById['userid2'] == 0) ? ('belum lunas') : ('lunas') ?></p>
+        <hr>
+
+    </div>
 
 <script src="css/script.js"></script>
 </body>

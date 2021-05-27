@@ -5,11 +5,17 @@ var updateUserModal = document.getElementById('updateUserModal');
 var modalButton01 = document.getElementById('id01-trigger');
 var idUpdate = document.getElementById('id-update');
 var namaprinterButton = document.getElementById('namaprinter');
+var detailModalButton = document.getElementById('detailModalButton');
 var spesifikasiButton = document.getElementById('spesifikasi');
+var detailModal = document.getElementById('detailModal');
 var hargaButton = document.getElementById('harga');
 var idUserUpdate = document.getElementById('idUserUpdate');
 var namaPrinterUser = document.getElementById('namaPrinterUser');
 var jumlahUser = document.getElementById('jumlahUser');
+var baseUrl = 'http://localhost/lsp2021/fikri h badjeber/pemograman web/';
+
+var user = 'user';
+var admin = 'admin';
 
 
 
@@ -32,12 +38,21 @@ window.onclick = function(event)
     {
         updateUserModal.style.display = "none";
     }
+    else if (event.target == detailModalButton)
+    {
+        detailModal.style.display = "none";
+    }
 }
 
 modalButton01.onclick = function(event)
 {
     modal01.style.display = "block";
     
+}
+
+detailModalButton.onclick = function(event)
+{
+    detailModalButton.style.display = "block";
 }
 
 function showAddUser()
@@ -64,3 +79,31 @@ function updateUser(event)
     jumlahUser.setAttribute('value', event.getAttribute('data-jumlah'));
     updateUserModal.style.display = "block";
 }
+
+function konfirmasi(elem,from)
+{
+    console.log(elem,from);
+    switch (from) {
+        case 'user':
+            var id = elem.getAttribute('data-id');
+            var state = confirm('Yakin pesanan mau dihapus?');
+            if (state)
+            {
+                window.location.href = baseUrl + 'process/delete.php?id=' + id;
+            }
+            break;
+        case 'admin':
+            var id = elem.getAttribute('data-id');
+            var state = confirm('yakin produk mau dihapus?');
+            if (state)
+            {
+                window.location.href = baseUrl + 'process/delete_produk.php?id=' + id;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+
+

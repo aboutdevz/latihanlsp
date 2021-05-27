@@ -46,10 +46,7 @@ html, body
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
   }
 
-.navbar li:hover
-{
-    box-shadow:;
-}
+
 
 .formLogin label
 {
@@ -166,12 +163,13 @@ tbody:before {
 
 .styled-table thead tr
 {
-    height: 3em;
+    height: 2em;
     border-radius: 25px;
     margin-bottom: 50px;
     box-shadow: 0 10px 5px 0 rgba(0, 0, 0, .1);
 
 }
+
 
 .styled-table thead tr th
 {

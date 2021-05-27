@@ -1,5 +1,6 @@
 <?php session_start();
 include_once('Conn.php');
+include_once('../global.php');
 
 $id = $Conn->escape_string($_POST['id']);
 $namaPrinter = $Conn->escape_string($_POST['namaprinter']);
@@ -16,11 +17,11 @@ if ( isset($_SESSION['is_login']) )
 
         if ( $Conn->affected_rows > 0 )
         {
-            echo '<script>alert("data berhasil diupdate");window.location.assign("http://localhost/ujikomv2/produk.php");</script>';
+            echo '<script>alert("data berhasil diupdate");window.location.assign("'.BASEURL.'produk.php");</script>';
         }
         else
         {
-            echo '<script>alert("data gagal diupdate");window.location.assign("http://localhost/ujikomv2/produk.php");</script>';
+            echo '<script>alert("data gagal diupdate");window.location.assign("'.BASEURL.'produk.php");</script>';
         }
     }
 }

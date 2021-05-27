@@ -1,8 +1,9 @@
 <?php session_start();?>
 <?php include_once('process/Conn.php')?>
-<?php if ( !isset($_SESSION['is_login']) ) header('Location: http://localhost/ujikomv2/login.php'); ?>
+<?php if ( !isset($_SESSION['is_login']) ) header('Location:'.BASEURL.'login.php'); ?>
 <?php
     
+    $cekIsi;
     $result         = $Conn->query(" SELECT * FROM tb_printer ");
     $resultArray    = $result->fetch_all(MYSQLI_ASSOC);
     
@@ -11,6 +12,15 @@
         $id = $Conn->escape_string($_GET['id']);
         $resultModal = $Conn->query(" SELECT * FROM tb_printer WHERE `idprinter` = $id ");
         $resultModal = $resultModal->fetch_assoc();
+    }
+
+    if ($result->num_rows < 1)
+    {
+        $cekIsi = false;
+    }
+    else
+    {
+        $cekIsi = true;
     }
 ?>
 
@@ -37,7 +47,7 @@
         <div class="card">
             <div class="card-title">
                 <h3 class="float-left">Data Produk</h3>
-                <button class="button ml-2 float-right" id="id01-trigger" style=" padding:10px">Add New Data</button>
+                <button class="button ml-2 float-right" id="id01-trigger" style=" padding:10px">Add New Produk</button>
             </div>
 
             <div class="table-wrapper">
@@ -62,12 +72,17 @@
                                 <td>
                                     <div id="id03" class="btn-group">
                                         <button class="id02-trigger" id="id02-trigger" onclick="getButtonUpdate(this);" data-id="<?=$hasil['idprinter']?>" data-namaprinter="<?=$hasil['namaprinter']?>" data-spesifikasi="<?=$hasil['spesifikasi']?>" data-harga="<?=$hasil['harga']?>">Update</button>
-                                        <button> <a style="color:white;" href="process/delete_produk.php?id=<?= $hasil['idprinter']?>">Delete</a> </button>
+                                        <button onclick="konfirmasi(this,admin)" data-id="<?= $hasil['idprinter']?>" style="color:white;">Delete</button>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach;?>
-
+                        <?php
+                            if (!$cekIsi)
+                            {
+                                echo '<tr><td colspan="6"><h4>Tidak Ada Data</h4></td></tr>';
+                            }
+                        ?>
 
                     </tbody>
                 </table>

@@ -1,4 +1,4 @@
 <?php session_start();
-
+include_once ('../global.php');
 session_destroy();
-header('Location: http://localhost/ujikomv2/login.php');
+header('Location: '.BASEURL.'login.php');
