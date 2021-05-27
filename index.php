@@ -77,15 +77,13 @@
                         <td>
                             <div class="btn-group">
                             
-                                <?= ( $_SESSION['user'] == "admin" ) ? ( ($hasil['userid2'] == 0) ? '<button> <a style="color:white;" href="process/konfirmasi.php?id='. $hasil['idtransaksi'] .'">Konfirmasi</a> </button>' : 'Done' ) : ($hasil['userid2'] != 0) ? ('<div class="btn-group">
+                                <?= ( $_SESSION['user'] == "admin" ) ? ( ($hasil['userid2'] == 0) ? ('<button> <a style="color:white;" href="process/konfirmasi.php?id='. $hasil['idtransaksi'] .'">Konfirmasi</a> </button>') : ('Done') ) : ( ($hasil['userid2'] != 0) ? ('<div class="btn-group">
     <button id="detailModalButton" style="background-color:#007bff; width:100%;"> <a style="text-decoration: none; color:white;" href="detail.php?id='.$hasil['idtransaksi'].'"> Detail</button>
     <button onclick="konfirmasi(this,user)" style="color:white;" data-id="'. $hasil['idtransaksi'] .'">Delete</button>
 </div>') : ('<div class="btn-group">
 <button data-id="'. $hasil['idtransaksi'] .'" data-idprinter="'. $hasil['namaprinter'] .'" data-jumlah="'. $hasil['jumlah'] .'" onclick="updateUser(this);">Update</button>
 <button onclick="konfirmasi(this,user)" style="color:white;" data-id="'. $hasil['idtransaksi'] .'">Delete</button>
-</div>').'
-                                    
-                                ' ?>
+</div>') )?>
                             </div>
                         </td>
                 </tr>
